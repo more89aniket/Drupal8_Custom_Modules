@@ -1,0 +1,5 @@
+name: Commerce Tools
+type: module
+description: Commerce Extras
+core: 8.x
+package: Custom

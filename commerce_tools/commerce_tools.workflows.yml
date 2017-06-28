@@ -1,0 +1,46 @@
+order_fulfillment_validation:
+  id: order_fulfillment_validation
+  group: commerce_order
+  label: 'Fulfillment, with payment validation'
+  states:
+    draft:
+      label: Draft
+    validation:
+      label: Validation
+    payment:
+      label: Payment
+    payment_ack:
+      label: Acknowledgement
+    fulfillment:
+      label: Fulfillment
+    dispatched:
+      label: Dispatched
+    completed:
+      label: Completed
+    canceled:
+      label: Canceled
+  transitions:
+    place:
+      label: 'Place order'
+      from: [draft]
+      to:   validation
+    validate:
+      label: 'Validate order'
+      from: [validation]
+      to: payment_ack
+    paymentack:
+      label: 'Payment Acknowledgement'
+      from: [payment_ack]
+      to:   fulfillment
+    fulfill:
+      label: 'Fulfill order'
+      from: [fulfillment]
+      to: dispatched
+    dispatch:
+      label: 'Order Dispatched'
+      from: [dispatched]
+      to:   completed
+    cancel:
+      label: 'Cancel order'
+      from: [draft, validation, fulfillment]
+      to:   canceled

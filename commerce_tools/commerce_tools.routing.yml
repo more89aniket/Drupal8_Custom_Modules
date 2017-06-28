@@ -1,0 +1,11 @@
+
+commerce_tools.order_state_mail_template:
+  path: '/admin/config/commerce/order_mail_template'
+  defaults:
+    _form: '\Drupal\commerce_tools\Form\OrderStateMailTemplate'
+    _title: 'OrderStateMailTemplate'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+

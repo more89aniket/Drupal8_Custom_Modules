@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * Contains commerce_tools.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use \Drupal\Core\Form\FormStateInterface;
+
+
+/**
+ * Implements hook_help().
+ */
+function commerce_tools_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the commerce_tools module.
+    case 'help.page.commerce_tools':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Commerce Extras') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/* Mail alter */
+function commerce_tools_mail_alter(&$message) {
+  if($message['id'] == 'commerce_tools_order_status'){
+    $message['body'][] = $message['params']['message'];
+    $message['subject'] = $message['params']['subject'];
+    //kint($message);die;
+    
+  }
+}
+
+function commerce_tools_form_alter(&$form, FormStateInterface $form_state, $form_id){
+  //print_r($form_id);commerce_order_custom_edit_form
+  if($form_id == 'commerce_order_custom_edit_form'){
+      //kint($form_state->getValues());
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'commerce_tools_order_status_form_submit';
+      }
+    }
+  }
+}
+
+function commerce_tools_order_status_form_submit(&$form, FormStateInterface $form_state){
+  //kint($form_state->getValue('state')[0]['value']);die;
+  $state = $form_state->getValue('state')[0]['value'];
+  
+
+}
+

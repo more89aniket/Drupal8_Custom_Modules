@@ -1,0 +1,7 @@
+services:
+  commerce_tools.fulfill.pre_transition:
+    class: Drupal\commerce_tools\EventSubscriber\CustomOrderEventSubscriber
+    arguments: []
+    tags:
+      - { name: event_subscriber }
+

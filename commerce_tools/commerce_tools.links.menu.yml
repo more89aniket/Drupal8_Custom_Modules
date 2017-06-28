@@ -1,0 +1,7 @@
+commerce_tools.order_state_mail_template:
+  title: 'Order Mail Templates'
+  route_name: commerce_tools.order_state_mail_template
+  description: 'Contains the mail templates for Commerce Order States (Place, Validate, Fulfillment & Complete).'
+  parent: system.admin_config_system
+  weight: 99
+
